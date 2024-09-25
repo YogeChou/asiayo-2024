@@ -22,4 +22,7 @@ async def custom_http_exception_handler(request: Request, exc: RequestValidation
 
 @app.post("/api/orders", status_code=201)
 def validate_order(order: Order):
+    if order.currency == "USD":
+        order.currency = "TWD"
+        order.price *= 31
     return order
