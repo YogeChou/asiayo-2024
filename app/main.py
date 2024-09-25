@@ -1,9 +1,18 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from app.schemas import Order
+from fastapi.middleware.cors import CORSMiddleware
+from app.routes import order_router
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(RequestValidationError)
@@ -20,9 +29,4 @@ async def custom_http_exception_handler(request: Request, exc: RequestValidation
     )
 
 
-@app.post("/api/orders", status_code=201)
-def validate_order(order: Order):
-    if order.currency == "USD":
-        order.currency = "TWD"
-        order.price *= 31
-    return order
+app.include_router(order_router, prefix="/api/orders")

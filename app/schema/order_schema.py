@@ -2,16 +2,16 @@ import re
 from pydantic import BaseModel, Field, field_validator
 
 
-class OrderAddress(BaseModel):
+class OrderAddressSchema(BaseModel):
     city: str
     district: str
     street: str
 
 
-class Order(BaseModel):
+class OrderSchema(BaseModel):
     id: str
     name: str
-    address: OrderAddress
+    address: OrderAddressSchema
     price: float = Field(..., gt=0)
     currency: str
 
