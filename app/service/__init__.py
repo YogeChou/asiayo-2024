@@ -1,1 +1,1 @@
-from .currency_service import CurrencyServiceFactory, CurrencyConverter
+from .currency_service import CurrencyFactory, CurrencyConverter

@@ -38,9 +38,9 @@ class CurrencyConverter:
         return amount * rate
 
 
-class CurrencyServiceFactory:
+class CurrencyFactory:
     @staticmethod
-    def get_currency_service(currency_code: str) -> Currency:
+    def get_currency(currency_code: str) -> Currency:
         currency_map = {
             "USD": USD(),
             "TWD": TWD(),
