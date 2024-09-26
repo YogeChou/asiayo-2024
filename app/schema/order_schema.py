@@ -33,6 +33,7 @@ class OrderSchema(BaseModel):
 
     @field_validator('currency')
     def validate_currency(cls, value):
-        if value not in ["TWD", "USD"]:
+        supported_currencies = {"TWD", "USD"}
+        if value not in supported_currencies:
             raise ValueError("Currency format is wrong")
         return value
